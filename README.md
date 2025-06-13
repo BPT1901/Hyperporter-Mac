@@ -19,28 +19,41 @@ NOTE, the live recording monitoring functionality is only supported on HyperDeck
 
 ## Screenshots
 
-![Main Interface](./HP1.png)
-![Main Interface](./HP2.png)
+![Main Interface](./images/HP1.png)
+![Main Interface](./images/HP2.png)
 
 ## Installation
 
 Download the appropriate version for your operating system:
 
 ### macOS
+
 - Download the `.dmg` file
 - Open the `.dmg` file
 - Drag Hyperporter to your Applications folder
 - Right-click and select "Open" when launching for the first time
 
-### Windows
-- Download the `.exe` file
-- Run the executable to start the application
-- No installation required (portable)
+## Install from source
 
-### Linux
-- Download the `.AppImage` file
-- Make it executable: `chmod +x Hyperporter.AppImage`
-- Double-click to run or launch from terminal
+Prerequisites:
+- Node.js 16+ (Install from nodejs.org)
+- Git
+- Yarn (recommended, or use npm)
+
+1. Clone repository:
+`git clone https://github.com/yourusername/hyperporter.git
+cd hyperporter`
+
+2. Install dependencies
+`npm install`
+
+3. Run in Development Mode
+`npm run electron-dev`
+
+4. Build and package the app
+`npm run build`
+`electron-builder build --mac`
+Windows and Linux versions to follow 
 
 ## Usage
 
@@ -59,57 +72,23 @@ Download the appropriate version for your operating system:
 - Network connection to HyperDeck
 - Operating System:
   - macOS 10.15 or later
-  - Windows 10 or later
-  - Linux (modern distributions)
 
-## Development
-
-### Prerequisites
-- Node.js (v14 or later)
-- npm or yarn
-- Git
-
-### Setup
-```bash
-# Clone the repository
-git clone [repository-url]
-
-# Install dependencies
-npm install
-
-# Install client dependencies
-cd client && npm install
-
-# Start development server
-npm run electron-dev
-```
-
-### Building
-```bash
-# Build for all platforms
-npm run electron:build
-
-# Build for specific platform
-npm run electron:build:mac    # macOS
-npm run electron:build:win    # Windows
-npm run electron:build:linux  # Linux
-```
 
 ## Version History
 
-- 1.1.0
+- 1.1.2
   - Initial release
   - Basic monitoring and transfer functionality
-  - Cross-platform support
+  - Ability to monitor multiple HyperDeck recorders
 
 ## Future planned release updates
+
 - Intergration with Companion software
 - Expanding to include AJA range of pro recorders
 
 ## License
 
 ISC License
-
 
 ## Support
 
