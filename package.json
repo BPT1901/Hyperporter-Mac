@@ -1,0 +1,96 @@
+{
+  "name": "hyperporter",
+  "version": "1.1.2",
+  "description": "HyperDeck recording management web application",
+  "main": "./electron/main.js",
+  "author": "Ben Turner",
+  "license": "ISC",
+  "build": {
+    "appId": "com.hyperporter.app",
+    "productName": "Hyperporter",
+    "mac": {
+      "target": [
+        {
+          "target": "dmg",
+          "arch": ["arm64"]
+        }
+      ],
+      "icon": "assets/icon.icns",
+      "hardenedRuntime": true,
+      "gatekeeperAssess": false,
+      "entitlements": "assets/entitlements.plist",
+      "entitlementsInherit": "assets/entitlements.plist",
+      "identity": "Ben Turner"
+    },
+    "files": [
+      "client/build/**/*",
+      "electron/**/*",
+      "server/**/*",
+      "package.json",
+      "node_modules/**/*"
+    ],
+    "asar": true,
+    "asarUnpack": [
+      "server/**/*",
+      "node_modules/fluent-ffmpeg/**/*",
+      "node_modules/chokidar/**/*",
+      "node_modules/fs-extra/**/*"
+    ],
+    "directories": {
+      "buildResources": "assets"
+    },
+    "extraResources": [
+      {
+        "from": "server",
+        "to": "server"
+      },
+      {
+        "from": "assets",
+        "to": ".",
+        "filter": [
+          "icon.*"
+        ]
+      }
+    ],
+    "extraMetadata": {
+      "main": "electron/main.js"
+    }
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "cd client && npm run build && cd ..",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "dev": "nodemon server/index.js",
+    "electron-dev": "cross-env NODE_ENV=development concurrently \"yarn --cwd client start\" \"wait-on http://localhost:3000 && electron .\"",
+    "electron": "electron .",
+    "electron:build": "npm run build && electron-builder --mac --x64 --arm64 && electron-builder --mac --universal",
+    "electron:build:mac": "npm run build && electron-builder --mac --arm64",
+    "electron:build:win": "npm run build && electron-builder --win",
+    "electron:build:linux": "npm run build && electron-builder --linux",
+    "postinstall": "electron-builder install-app-deps"
+  },
+  "dependencies": {
+    "basic-ftp": "^5.0.5",
+    "chokidar": "^4.0.3",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "ffi-napi": "^4.0.3",
+    "fluent-ffmpeg": "^2.1.2",
+    "fs-extra": "^11.2.0",
+    "node-pty": "^1.0.0",
+    "node-rtsp-stream": "^0.0.9",
+    "serialport": "^13.0.0",
+    "ws": "^8.18.0"
+  },
+  "devDependencies": {
+    "@electron/universal": "^2.0.3",
+    "concurrently": "^8.2.2",
+    "cross-env": "^7.0.3",
+    "electron": "^25.9.8",
+    "electron-builder": "^24.13.3",
+    "electron-rebuild": "^3.2.9",
+    "nodemon": "^3.0.3",
+    "wait-on": "^7.0.1"
+  }
+}
